@@ -10,6 +10,9 @@ export async function updateBadgeInRepo(
 ): Promise<void> {
   const tmpRepoDir = "tmpRepo";
 
+  await ghexec.exec(`git config --global user.email "mengel@redhat.com"`);
+  await ghexec.exec(`git config --global user.name "limgo badge action"`);
+
   await ghexec.exec(
     `git clone https://${ghTokenOwner}:${ghToken}@${repo}.git ${tmpRepoDir}`
   );
