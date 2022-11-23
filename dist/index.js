@@ -202,6 +202,7 @@ function updateBadgeInRepo(ghTokenOwner, ghToken, repo, badgeBranch, badgePath, 
         const diff = yield ghexec.getExecOutput(assembleGitCmd(tmpRepoDir, `diff`));
         if (diff.stdout == "") {
             console.log("No changes detected, skipping...");
+            return;
         }
         yield ghexec.exec(assembleGitCmd(tmpRepoDir, `add ${badgeFileTargetName}`));
         yield ghexec.exec(assembleGitCmd(tmpRepoDir, `commit -m "updated limgo badge"`));

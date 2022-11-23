@@ -32,7 +32,8 @@ export async function updateBadgeInRepo(
   );
   const diff = await ghexec.getExecOutput(assembleGitCmd(tmpRepoDir, `diff`));
   if (diff.stdout == "") {
-    console.log("No changes detected, skipping...")
+    console.log("No changes detected, skipping...");
+    return;
   }
   await ghexec.exec(assembleGitCmd(tmpRepoDir, `add ${badgeFileTargetName}`));
   await ghexec.exec(
