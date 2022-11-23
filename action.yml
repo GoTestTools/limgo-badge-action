@@ -1,0 +1,36 @@
+name: "limgo-badge-action"
+description: "Do not let your test coverage drop"
+branding:
+  color: orange
+  icon: check-circle
+inputs:
+  limgo_file:
+    description: "The limgo output to generate the badge for."
+    required: true
+  limgo_file_format:
+    description: "The format of the limgo output. Has to be one of [tab, md, json]."
+    required: false
+    default: "tab"
+  color_success:
+    description: "The color of the badge if the required coverage threshold is met."
+    required: false
+    default: ""
+  color_failure:
+    description: "The color of the badge if the required coverage threshold is not met."
+    required: false
+    default: ""
+  badge_name:
+    description: "The name of the generated badge."
+    required: false
+    default: "limgo-badge.png"
+  branch:
+    description: "The branch to push the generated limgo badge to."
+    required: false
+    default: "limgo-badge"
+  github_token:
+    description: "The GitHub token to push to the current repo. Suggested as secrets.GITHUB_TOKEN"
+    required: true
+
+runs:
+  using: "node16"
+  main: "dist/index.js"

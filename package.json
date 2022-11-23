@@ -1,0 +1,35 @@
+{
+  "name": "limgo-badge-action",
+  "version": "0.0.0",
+  "description": "This action creates a custom badge for the test coverage summary from limgo",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "start-dev": "tsc && node lib/main.js",
+    "build": "tsc && ncc build lib/main.js",
+    "format": "prettier --write **/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gotesttools/limgo-badge-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gotesttools/limgo-badge-action/issues"
+  },
+  "homepage": "https://github.com/gotesttools/limgo-badge-action#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@vercel/ncc": "^0.34.0",
+    "prettier": "^2.8.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
+    "@actions/tool-cache": "^2.0.1"
+  }
+}
