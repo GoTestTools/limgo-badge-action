@@ -11,6 +11,23 @@ inputs:
     description: "The format of the limgo output. Has to be one of [tab, md, json]."
     required: false
     default: "tab"
+  badge_name:
+    description: "The name of the generated badge."
+    required: false
+    default: "limgo-badge.png"
+  repo:
+    description: "The repo to push the generated limgo badge to."
+    required: true
+  branch:
+    description: "The branch to push the generated limgo badge to."
+    required: false
+    default: "limgo-badge"
+  github_token:
+    description: "The GitHub token to push to the current repo. Suggested as secrets.GITHUB_TOKEN"
+    required: true
+  github_token_owner:
+    description: "The owner of the GitHub token."
+    required: true
   color_success:
     description: "The color of the badge if the required coverage threshold is met."
     required: false
@@ -19,17 +36,6 @@ inputs:
     description: "The color of the badge if the required coverage threshold is not met."
     required: false
     default: ""
-  badge_name:
-    description: "The name of the generated badge."
-    required: false
-    default: "limgo-badge.png"
-  branch:
-    description: "The branch to push the generated limgo badge to."
-    required: false
-    default: "limgo-badge"
-  github_token:
-    description: "The GitHub token to push to the current repo. Suggested as secrets.GITHUB_TOKEN"
-    required: true
 
 runs:
   using: "node16"
