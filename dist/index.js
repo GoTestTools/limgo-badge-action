@@ -199,6 +199,10 @@ function updateBadgeInRepo(ghTokenOwner, ghToken, repo, badgeBranch, badgePath, 
             yield ghexec.exec(assembleGitCmd(tmpRepoDir, `checkout --track origin/${badgeBranch}`));
         }
         yield ghexec.exec(`cp -f ${badgePath} ./${tmpRepoDir}/${badgeFileTargetName}`);
+        const diff = yield ghexec.getExecOutput(assembleGitCmd(tmpRepoDir, `diff`));
+        if (diff.stdout == "") {
+            console.log("No changes detected, skipping...");
+        }
         yield ghexec.exec(assembleGitCmd(tmpRepoDir, `add ${badgeFileTargetName}`));
         yield ghexec.exec(assembleGitCmd(tmpRepoDir, `commit -m "updated limgo badge"`));
         yield ghexec.exec(assembleGitCmd(tmpRepoDir, `push https://${ghTokenOwner}:${ghToken}@${repo}.git HEAD`));
