@@ -297,7 +297,7 @@ function getInputs() {
             enabledCoverage: {
                 stmts: core.getBooleanInput("badge_enabled_stmt"),
                 lines: core.getBooleanInput("badge_enabled_lines"),
-                branches: core.getBooleanInput("badge_enabled_branches"),
+                branches: core.getBooleanInput("badge_enabled_branch"),
             },
             repo: core.getInput("repo"),
             branch: core.getInput("branch"),
