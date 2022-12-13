@@ -10,7 +10,11 @@ async function run(): Promise<void> {
     inputs.limgoFile,
     inputs.limgoFileFormat
   );
-  const badgePath = await generateBadge(parsedFile, inputs.enabledCoverage, inputs.badgeName);
+  const badgePath = await generateBadge(
+    parsedFile,
+    inputs.enabledCoverage,
+    inputs.badgeName
+  );
 
   updateBadgeInRepo(
     inputs.githubTokenOwner,

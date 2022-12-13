@@ -17,24 +17,31 @@ export async function updateBadgeInRepo(
     `git clone https://${ghTokenOwner}:${ghToken}@${repo}.git ${tmpRepoDir}`
   );
 
-  if (!(await hasRepoBadgeBranch(tmpRepoDir, badgeBranch))) {
-    await ghexec.exec(
-      assembleGitCmd(tmpRepoDir, `switch --orphan ${badgeBranch}`)
-    );
-  } else {
-    await ghexec.exec(
-      assembleGitCmd(tmpRepoDir, `checkout --track origin/${badgeBranch}`)
-    );
+  const repoHasBranch = await hasRepoBadgeBranch(tmpRepoDir, badgeBranch);
+
+  let checkoutCmd = `checkout --track origin/${badgeBranch}`;
+  if (!repoHasBranch) {
+    checkoutCmd = `switch --orphan ${badgeBranch}`;
   }
+  await ghexec.exec(assembleGitCmd(tmpRepoDir, checkoutCmd));
 
   await ghexec.exec(
     `cp -f ${badgePath} ./${tmpRepoDir}/${badgeFileTargetName}`
   );
-  const diff = await ghexec.getExecOutput(assembleGitCmd(tmpRepoDir, `diff`));
-  if (diff.stdout == "") {
-    console.log("No changes detected, skipping...");
-    return;
+
+  // check for diff and abort early if there is no change
+  if (repoHasBranch) {
+    const diff = await ghexec.getExecOutput(assembleGitCmd(tmpRepoDir, `diff`));
+    if (diff.stderr != "") {
+      console.log(`Encountered error while checking for diff: ${diff.stderr}`);
+      return;
+    }
+    if (diff.stdout == "") {
+      console.log("No changes detected, skipping...");
+      return;
+    }
   }
+
   await ghexec.exec(assembleGitCmd(tmpRepoDir, `add ${badgeFileTargetName}`));
   await ghexec.exec(
     assembleGitCmd(tmpRepoDir, `commit -m "updated limgo badge"`)
