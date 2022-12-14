@@ -1,6 +1,6 @@
 {
   "name": "limgo-badge-action",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This action creates a custom badge for the test coverage summary from limgo",
   "main": "index.js",
   "scripts": {
