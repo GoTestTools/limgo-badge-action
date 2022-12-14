@@ -10,7 +10,15 @@
 
 ---
 
-This action uses the coverage output from [limgo](https://github.com/GoTestTools/limgo) to generate a badge visualizing the achieved test coverage. 
+This action uses the coverage output from [limgo](https://github.com/GoTestTools/limgo) to generate a badge visualizing the achieved test coverage. It also pushes the badge to the specified `repository/branch` so that it can be integrated into any README via: 
+```html
+<img src="https://<repository>/blob/<branch>/<badge-name>.png?raw=true" alt="test coverge" />
+```
+
+The following sample badge is imported from the [GoTestTools/limgo](https://github.com/GoTestTools/limgo) repository: 
+<p align="center">
+  <img src="https://github.com/GoTestTools/limgo/blob/limgo-badge/limgo-badge.png?raw=true" alt="test coverge" />
+</p>
 
 ## Usage
 
