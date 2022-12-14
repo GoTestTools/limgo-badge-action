@@ -199,7 +199,7 @@ const ghexec = __importStar(__nccwpck_require__(1514));
 function updateBadgeInRepo(ghTokenOwner, ghToken, repo, badgeBranch, badgePath, badgeFileTargetName) {
     return __awaiter(this, void 0, void 0, function* () {
         const tmpRepoDir = "tmpRepo";
-        yield ghexec.exec(`git config --global user.email "mengel@redhat.com"`);
+        yield ghexec.exec(`git config --global user.email "limgo@badge-action.com"`);
         yield ghexec.exec(`git config --global user.name "limgo badge action"`);
         yield ghexec.exec(`git clone https://${ghTokenOwner}:${ghToken}@${repo}.git ${tmpRepoDir}`);
         const repoHasBranch = yield hasRepoBadgeBranch(tmpRepoDir, badgeBranch);
